@@ -18,45 +18,33 @@ class Mtrx extends Array {
     if (this.rows !== other.rows || this.cols !== other.cols) {
       throw new TypeError('matrices must have the same shape')
     }
-    const result = []
-    for (let i = 0; i < this.rows; i++) {
-      result[i] = []
-      for (let j = 0; j < this.cols; j++) {
-        result[i][j] = this[i][j] + other[i][j]
-      }
-    }
-    return new Mtrx(result)
+
+    return new Mtrx(
+      this.map((row, i) => row.map((value, j) => value + other[i][j]))
+    )
   }
 
   sub(other) {
     if (this.rows !== other.rows || this.cols !== other.cols) {
       throw new TypeError('matrices must have the same shape')
     }
-    const result = []
-    for (let i = 0; i < this.rows; i++) {
-      result[i] = []
-      for (let j = 0; j < this.cols; j++) {
-        result[i][j] = this[i][j] - other[i][j]
-      }
-    }
-    return new Mtrx(result)
+
+    return new Mtrx(
+      this.map((row, i) => row.map((value, j) => value - other[i][j]))
+    )
   }
 
   mul(other) {
     if (typeof other === 'number') {
-      const result = []
-      for (let i = 0; i < this.rows; i++) {
-        result[i] = []
-        for (let j = 0; j < this.cols; j++) {
-          result[i][j] = this[i][j] * other
-        }
-      }
-      return new Mtrx(result)
+      return new Mtrx(
+        this.map((row) => row.map((value) => value * other))
+      )
     }
 
     if (this.cols !== other.rows) {
       throw new TypeError('incompatible matrix shapes for multiplication')
     }
+
     const result = []
     for (let i = 0; i < this.rows; i++) {
       result[i] = []
@@ -72,14 +60,9 @@ class Mtrx extends Array {
   }
 
   div(n) {
-    const result = []
-    for (let i = 0; i < this.rows; i++) {
-      result[i] = []
-      for (let j = 0; j < this.cols; j++) {
-        result[i][j] = this[i][j] / n
-      }
-    }
-    return new Mtrx(result)
+    return new Mtrx(
+      this.map((row) => row.map((value) => value / n))
+    )
   }
 }
 
