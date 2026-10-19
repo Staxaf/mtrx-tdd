@@ -1,8 +1,7 @@
-function sub(a, b) {
-  if (a.length !== b.length || a[0].length !== b[0].length) {
-    throw new TypeError('matrices must have the same shape')
-  }
+const assertSameShape = require('./assertSameShape')
 
+function sub(a, b) {
+  assertSameShape(a, b)
   return a.map((row, i) => row.map((value, j) => value - b[i][j]))
 }
 
