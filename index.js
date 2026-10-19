@@ -1,3 +1,8 @@
+const add = require('./src/add')
+const sub = require('./src/sub')
+const mul = require('./src/mul')
+const div = require('./src/div')
+
 class Mtrx extends Array {
   constructor(matrix) {
     super(matrix.length)
@@ -15,54 +20,19 @@ class Mtrx extends Array {
   }
 
   add(other) {
-    if (this.rows !== other.rows || this.cols !== other.cols) {
-      throw new TypeError('matrices must have the same shape')
-    }
-
-    return new Mtrx(
-      this.map((row, i) => row.map((value, j) => value + other[i][j]))
-    )
+    return new Mtrx(add(this, other))
   }
 
   sub(other) {
-    if (this.rows !== other.rows || this.cols !== other.cols) {
-      throw new TypeError('matrices must have the same shape')
-    }
-
-    return new Mtrx(
-      this.map((row, i) => row.map((value, j) => value - other[i][j]))
-    )
+    return new Mtrx(sub(this, other))
   }
 
   mul(other) {
-    if (typeof other === 'number') {
-      return new Mtrx(
-        this.map((row) => row.map((value) => value * other))
-      )
-    }
-
-    if (this.cols !== other.rows) {
-      throw new TypeError('incompatible matrix shapes for multiplication')
-    }
-
-    const result = []
-    for (let i = 0; i < this.rows; i++) {
-      result[i] = []
-      for (let j = 0; j < other.cols; j++) {
-        let sum = 0
-        for (let k = 0; k < this.cols; k++) {
-          sum += this[i][k] * other[k][j]
-        }
-        result[i][j] = sum
-      }
-    }
-    return new Mtrx(result)
+    return new Mtrx(mul(this, other))
   }
 
   div(n) {
-    return new Mtrx(
-      this.map((row) => row.map((value) => value / n))
-    )
+    return new Mtrx(div(this, n))
   }
 }
 

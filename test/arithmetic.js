@@ -34,3 +34,5 @@ describe('arithmetic', function() {
     expect(() => a.add(c)).to.throw(TypeError)
   })
 })
+
+
