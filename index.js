@@ -2,6 +2,12 @@ const add = require('./src/add')
 const sub = require('./src/sub')
 const mul = require('./src/mul')
 const div = require('./src/div')
+const isDiag = require('./src/isDiag')
+const isMtrxLike = require('./src/isMtrxLike')
+const isSameShape = require('./src/isSameShape')
+const isSingular = require('./src/isSingular')
+const equalAll = require('./src/equalAll')
+const equal = require('./src/equal')
 
 class Mtrx extends Array {
   constructor(matrix) {
@@ -33,6 +39,34 @@ class Mtrx extends Array {
 
   div(n) {
     return new Mtrx(div(this, n))
+  }
+
+  static isDiag(matrix) {
+    return isDiag(matrix)
+  }
+
+  static isMtrx(value) {
+    return value instanceof Mtrx
+  }
+
+  static isMtrxLike(value) {
+    return isMtrxLike(value)
+  }
+
+  static isSingular(matrix) {
+    return isSingular(matrix)
+  }
+
+  static isSameShape(a, b) {
+    return isSameShape(a, b)
+  }
+
+  static equalAll(a, b) {
+    return equalAll(a, b)
+  }
+
+  static equal(a, b) {
+    return equal(a, b)
   }
 }
 
